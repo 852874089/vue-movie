@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue 实例生命周期函数</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        hello world
+    </div>
+
+    <script>
+        //生命周期函数就是vue实例在某一时间点会自动执行的函数
+        var vm = new Vue({
+            el: '#app',
+            //实例创建前 初始化
+            beforeCreate: function () {
+                console.log('beforeCreate');
+            },
+            //实例创建时 初始化
+            created: function () {
+                console.log('created');
+            }
+
+        })
+    </script>
+
+</body>
+</html>

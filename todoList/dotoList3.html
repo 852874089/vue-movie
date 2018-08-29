@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>TodoList</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="inputValue" />
+        <button v-on:click="handleBtnClick">提交</button>
+        <ul>
+<!--             <li v-for="item in list">{{item}}</li>
+ -->
+            <!-- content 变量 传值-->
+            <todo-item v-bind:content="item" v-for="item in list"></todo-item>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        //局部组件
+        var TodoItem ={
+             //接收外部传进来的数据
+            props:['content'],
+            //组件模板 
+            template:'<li>{{content}}</li>'
+        }
+
+        var app = new Vue({
+            el:'#app',
+            //局部组件需要注册到vue实例中才能使用
+            components:{
+                TodoItem:TodoItem
+            },
+            data:{
+                list:[],
+                inputValue:''
+            },
+            methods:{
+                handleBtnClick: function(){
+                    this.list.push(this.inputValue);
+                    this.inputValue='';
+                    //alert(this.inputValue);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

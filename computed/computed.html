@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>计算属性，方法，侦听</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+       {{fullName}}
+       {{age}}
+    </div>
+
+    <script type="text/javascript">
+    //计算属性和watch侦听都有内置缓存，变量改变时才会重新计算，变量没有改变时运用上一次的计算结果
+    //方法没有缓存
+        var app = new Vue({
+            //定义标签 接管doms例
+            el:'#app',
+            //数据
+            data:{
+                firstName: "DeLL",
+                lastName: "Lee",
+                age: 28
+            },
+            //计算属性
+            computed:{
+                fullName: function(){
+                    console.log("计算了一次");
+                    return this.firstName + " " +this.lastName;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

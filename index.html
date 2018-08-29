@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue 实例</title>
+    <script src="./vue.js"></script>
+
+</head>
+<body>
+    <div id="root">
+        <div v-on:click="handelClick">
+            {{massage}}
+        </div>
+        <todo-item></todo-item>
+    </div>
+
+    <script>
+        //创建组件  每个组件也是一个vue实例
+        Vue.component("todoItem",{
+            template: '<div>hello item</div>'
+        })
+
+        //创建vue实例
+        var vm = new Vue({
+            //el vue实例属性
+            el: "#root",
+            data:{
+                massage:'hello world'
+            },
+            methods:{
+                handelClick: function () {
+                    alert("fghj");
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
