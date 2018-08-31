@@ -7,13 +7,18 @@
 </head>
 <body>
     <div id="app">
-        hello world
+
     </div>
 
     <script>
         //生命周期函数就是vue实例在某一时间点会自动执行的函数
         var vm = new Vue({
             el: '#app',
+            //模板 替换挂载点app里面的html内容
+            template:'<div>{{msg}}</div>',
+            data:{
+                msg: "哈哈哈哈我是猪头彪"
+            },
             //实例创建前 初始化
             beforeCreate: function () {
                 console.log('beforeCreate');
@@ -21,6 +26,30 @@
             //实例创建时 初始化
             created: function () {
                 console.log('created');
+            },
+            //模板和数据相结合 挂载到页面上 页面渲染前
+            beforeMount: function () {
+                console.log(this.$el);
+                console.log('beforeMount');
+            },
+            //模板和数据相结合 挂载到页面上 页面渲染后
+            mounted: function () {
+                console.log(this.$el);
+                console.log('mounted');
+            },
+            //vue实例呗摧毁前
+            beforeDestroy: function () {
+                console.log('beforeDestroy');
+            },
+            //vue实例呗摧毁后
+            destroyed: function () {
+                console.log('destroyed');
+            },
+            beforeUpdate: function () {
+                console.log('beforeUpdate');
+            },
+            updated: function () {
+                console.log('updated');
             }
 
         })

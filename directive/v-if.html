@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue 实例</title>
+    <script src="../vue.js"></script>
+
+</head>
+<body>
+    <div id="root">
+        <!--v-if 后面接js表达式-->
+        <div v-if="show">
+            {{message}}
+        </div>
+    </div>
+
+    <script>
+        //创建vue实例
+        var vm = new Vue({
+            //el vue实例属性
+            el: "#root",
+            data:{
+                message: "Hello World",
+                show:  true
+            },
+
+        })
+    </script>
+
+</body>
+</html>

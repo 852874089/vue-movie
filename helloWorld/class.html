@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>vue 样式的绑定</title>
+    <script src="../vue.js"></script>
+    <style>
+        .activated{color: red;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--class的对象绑定-->
+        <!--class类名为activated-->
+        <div @click="handleDivClick" :class="{activated: isActivated}" >Hello world</div>
+        <!--数组 可以为多个变量-->
+        <div @click="handleDivClickOne" :class="[activatedOne,activatedTwo]">hi world</div>
+
+
+        <!--style 内联样式绑定-->
+        <div @click="handleDivClickTwo" :style="styleObj" >Hello pig</div>
+
+        <!--style 数组 内联样式绑定  绑定对象-->
+        <div @click="handleDivClickTwo" :style="[styleObj,{fontSize: '20px'}]" >Hello pig</div>
+
+
+    </div>
+
+    <script type="text/javascript">
+            var app = new Vue({
+                el: "#app",
+                data:{
+                    isActivated:false,
+                    activatedOne: "",
+                    activatedTwo: "activated-two",
+                    styleObj:{
+                        color: "black"
+                    }
+                },
+                methods:{
+                    handleDivClick: function() {
+                        //this.isActivated = true;
+                        //点击文字时 样式取反
+                        this.isActivated = !this.isActivated;
+                    },
+                    handleDivClickOne: function () {
+                        /*当点击了一下文字已经未红色时，再点击变回黑色*/
+
+                       /* if(this.activated1 === "activated"){
+                            this.activated1 = "";
+                        }else {
+                            this.activated1 = "activated";
+                        }*/
+                        /*=== 严格比较，必须数值和数据类型的都相同*/
+
+                       //三元表达式
+                        /*this.activated1 = 条件 ? 真结果 : 假结果
+                        将结果返回给this.activated1*/
+                        this.activatedOne = this.activatedOne ===  "activated" ? "" : "activated"
+                    },
+                    handleDivClickTwo: function () {
+                        //this.styleObj.color = "red"
+                        this.styleObj.color = this.styleObj.color ===  "black" ? "red" : "black"
+                    }
+                    
+                }}
+                )
+    </script>
+</body>
+</html>
