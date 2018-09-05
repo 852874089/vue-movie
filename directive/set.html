@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue 中的set方法</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>改变对象的数据有两个方法</h3>
+        <p>1.改变数组的引用，写一个新的对象覆盖旧的</p>
+        <p :style="red">2.用set方法改变对象数据</p>
+
+        <h3>改变数组的数据有三个方法</h3>
+        <p>1.用变异方法 pop splice等</p>
+        <p>2.改变数组的引用，写一个新的数组覆盖旧的</p>
+        <p :style="red">3.用set方法改变数组的数据，用index下标</p>
+
+        <div v-for="(item, index) of userInfo">
+            {{item}}
+        </div>
+
+        <div :style="styleObj">23</div>
+
+        <div v-for="(item, index) of list">
+            {{item}}
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                styleObj: {
+                    height: "70px"
+                },
+                red:{
+                    color: "red"
+                },
+                userInfo: {
+                    name: "wb",
+                    age: "30",
+                    gender: "male"
+
+                },
+                list: [1,2,3,4]
+            }
+        })
+
+        //通过set方法在对象中添加数据  全局方法
+        Vue.set(vm.userInfo,"address","guangzhou");
+
+        //通过set方法在对象中添加数据  vue实例方法vm.$set()
+        vm.$set(vm.userInfo,"email","134");
+
+        //通过set方法改变数组数据 Vue.set(实例里面的数组,下标,该列表项修改后的数据);
+        Vue.set(vm.list,1,5);
+
+        //通过vue实例方法 set方法改变数组数据 Vue.set(实例里面的数组,下标,该列表项修改后的数据);
+        vm.$set(vm.list,2,10);
+
+
+    </script>
+</body>
+</html>

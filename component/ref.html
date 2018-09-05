@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue 组件中的细节点</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>ref引用获取dom节点</h2>
+        <p>div用$refs引用获取到的是dom</p>
+        <p>组件使用$refs获取的是该组件的引用</p>
+
+        <div ref="hello"
+             @click="alertFun">
+             hello world
+        </div>
+
+        <div :style="styleObj"></div>
+
+        <div>
+            <!--@change 监听事件-->
+            <counter ref="one" @change="handleChange"></counter>
+            <counter ref="two" @change="handleChange"></counter>
+            <div>求和：{{total}}</div>
+        </div>
+    </div>
+
+    <script>
+        //定义子组件
+        Vue.component("counter",{
+                template: "<div @click='handleClick'>{{number}}</div>",
+                data: function () {
+                    return {
+                        number: 0
+                    }
+                },
+                methods: {
+                        handleClick: function () {
+                            this.number ++;
+                            //用$emit 向父组件触发时间
+                            this.$emit("change");
+                        }
+                    }
+
+        })
+
+         var vm = new Vue({
+             el: "#app",
+             data:{
+                 styleObj:{ height: "50px"},
+                 total: 0
+             },
+             methods:{
+                 alertFun: function () {
+                     alert(this.$refs.hello.innerHTML)
+                 },
+                 handleChange: function () {
+                     //console.log(this.$refs.one.number);
+                     //console.log(this.$refs.two.number)
+                     this.total = this.$refs.one.number + this.$refs.two.number
+
+                 }
+             }
+         })
+    </script>
+</body>
+</html>

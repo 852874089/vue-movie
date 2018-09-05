@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件的传值</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>
+            vue中父组件向子组件传值通过属性传值 <br/>
+            vue中子组件用props接收父组件的传值,子组件通过事件触发给父组件传值,父组件监听子组件的数据变化
+        </p>
+        <p>
+            注： 单向数据流，父组件可以传值给子组件，但是子组件不能修改父组件的数据 <br>
+            只能在子组件data里面重新复制一份数据，作为我们子组件的数据再做修改</p>
+
+        <!--count 为字符串； :count 为数字-->
+        <counter :count="1" @inc="handleIncrease"></counter>
+        <counter :count="2" @inc="handleIncrease"></counter>
+        <div>{{total}}</div>
+    </div>
+
+    <script>
+        //定义一个局部组件
+        var counter = {
+            //接收父组件数据
+            props:['count'],
+            data: function(){
+                return {
+                    number: this.count
+                }
+            },
+            template:"<div @click='handleClick'>{{number}}</div>",
+            methods:{
+                handleClick: function () {
+                    this.number ++
+                    //设置参数 告诉父组件我点击一次改变了多少
+                    this.$emit("inc",1)
+                }
+            }
+        }
+
+        var vm = new Vue({
+            el: "#app",
+            //注册子组件
+            components:{
+                counter: counter
+            },
+            data:{
+                total: 3
+            },
+            methods: {
+                //step 接收子组件带过来的参数
+                handleIncrease: function (step) {
+                    //alert(step);
+                    this.total += step;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
