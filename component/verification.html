@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件参数校验和非props属性</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>props属性和非props属性的区别</h3>
+        <p>props属性： 父组件传值，子组件子组件用props接收，在子组件template中可以使用，dom操作不显示该属性</p>
+        <p>非props属性： 父组件传值，子组件不接收，在子组件template中不可以使用，dom操作外层显示该属性</p>
+
+        <child content="hello world"></child>
+    </div>
+
+    <script>
+
+        Vue.component("child",{
+            //props:['content'],
+            //属性参数约束 字符串String 数字Number 对象
+            props: {
+                //参数类型必须为字符串
+                //content: String
+
+                //参数类型必须为数字
+                //content: Number
+
+                //参数类型必须是字符串或者数字
+                //content: [String,Number]
+
+                content: {
+                    //参数类型为对象
+                    //type: Object
+
+                    //参数类型为字符串
+                    type: String,
+
+                    //required 设置是否必传
+                    required: false,
+                    //default 设置默认值 当属性没有传值时显示默认值，当属性传值时显示属性值
+                    default: 'error',
+                    //校验长度 函数  value传入的内容
+                    validator: function (value) {
+                        return (value.length > 5)
+                    }
+                }
+
+
+            },
+            template: "<div>{{content}}</div>"
+        })
+
+        var vm = new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>给vue组件绑定原生事件</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>给vue组件绑定原生事件--native的使用</h2>
+        <p>子组件不能直接触发父组件的原生事件，只能在子组件template模板中重新写一个事件，用$emit向父组件触发父组件的事件</p>
+        <p>现在用native 子组件可以直接绑定父组件的原生事件</p>
+
+        <child @click.native="handelClick"></child>
+    </div>
+
+    <script>
+
+        Vue.component("child",{
+            template: "<div>child</div>",
+        })
+
+        var vm = new Vue({
+            el: "#app",
+            methods:{
+                handelClick: function () {
+                    alert("click")
+                }
+            }
+        })
+    </script>
+</body>
+</html>

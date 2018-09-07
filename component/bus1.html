@@ -1,0 +1,72 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="todoList">
+
+    <my-component1></my-component1>
+    <my-component2></my-component2>
+
+
+</div>
+<!--
+          正则表达：<input type="text" value='' placeholder="请输入验证正则" onchange='checking(this.value)'> -->
+<script>
+    //   function checking(val){
+    //     var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+    // console.log(myreg.test(val))
+    //   }
+
+
+    let Hub = new Vue(); //创建事件中心----中转站
+    //注册组件1
+    Vue.component('my-component1', {
+        template: `<div @click="eve">我是组件一：点击我</div>`,
+        data() {
+            return {
+                hehe: '我是从组件一过来的',
+            }
+        },
+        methods: {
+            eve() {
+                //点击的时候把事件挂载在中转站我们创建的Hub上
+                Hub.$emit('change',this.hehe); //Hub触发事件
+            }
+        }
+    });
+    //注册组件2
+    Vue.component('my-component2', {
+        template: `<div>我是组件二：{{msg}}</div>`,
+        data() {
+            return {
+                msg: '',
+            }
+        },
+        created() {
+            //组件2监听自定义事件，当事件存在就执行，所以上面点击的时候一挂载有这个自定义事件就执行了，形成了非父子组件通讯
+            Hub.$on('change', (obj) => { //Hub接收事件
+                this.msg = obj;
+            });
+        }
+    });
+    new Vue({
+        el:'#todoList',
+
+        data () {
+            return {
+            }
+        },
+        methods:{
+
+        },
+
+    })
+
+
+
+
+</script>
+</body>
+</html>
