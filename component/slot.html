@@ -6,11 +6,26 @@
     <script src="../vue.js"></script>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <p>使用slot标签使组件内部插入的内容可以渲染到页面上</p>
+        <p>slot里面可以写默认内容，组件插槽内没有内容的话就会显示默认内容，有内容的话显示内容</p>
 
-    <script type="">
-        Vue.component("child",{
-            template:'<div></div>'
+        <p style="color: crimson;">具名插槽的使用，可以使用多个，根据name值的不同，区分添加到页面上的顺序</p>
+
+        <body-content>
+            <div class="header" slot="header">header</div>
+            <div class="footer" slot="footer">footer</div>
+        </body-content>
+    </div>
+
+    <script>
+        Vue.component("body-content",{
+            template:`<div>
+                        <slot name="header"></slot>
+                        <div class="body-content">这是中间内容部分</div>
+                        <slot name="footer"></slot>
+                        <slot name="info">设置默认值</slot>
+                        </div>`
         })
         var vm = new Vue({
             el:"#app"

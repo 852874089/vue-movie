@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中的作用域插槽</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <p>作用域插槽使用场景：子组件的数据不止使用一次，引用子组件时需要实现不同的展示数据模板样式</p>
+    <p>作用域插槽必须用template标签开始，申明从子组件接收的数据都放在props里面，</p>
+    <div id="app">
+
+        <child>
+            <template slot-scope="props">
+                <li>{{props.item}}</li>
+            </template>
+        </child>
+    </div>
+
+    <script>
+        Vue.component("child",{
+            data: function(){
+              return{
+                  list:[1,2,3,4]
+              }
+            },
+            //循环数据，把数据item返回到父组件，父组件中对数据进行不同需要的展示
+            template: `<div>
+                        <ul>
+                            <slot v-for="item of list" :item=item></slot>
+                        </ul>
+                        </div>
+                        `
+        })
+
+        var vm = new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>
