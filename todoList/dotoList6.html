@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>购物车2</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            课程：<input type="text" name="" v-model="course" />
+            价格: <input type="text" name="" v-model="price" />
+            <button @click="handleBtnClick">添加商品</button>
+        </div>
+       <ul>
+           <li v-for="item in classList">
+               课程：{{item.text}}-----价格：{{item.price}}
+           </li>
+       </ul>
+        <div>
+            <table>
+                <tr>
+                    <th>选中</th>
+                    <th>课程</th>
+                    <th>数量</th>
+                    <th>价格</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        //新建一个vue实例
+        // el,data,methods都是vue实例或者方法
+        var app = new Vue({
+            //定义标签 接管doms例
+            el:'#app',
+            //数据
+            data:{
+                classList:[
+                    {text:'app',price:20},
+                    {text:'vue',price:30},
+                ],
+                course:'',
+                price:''
+            },
+            //方法
+            methods:{
+                handleBtnClick: function(){
+                    this.classList.push({text:this.course,price:this.price})
+                }
+            }
+        })
+    </script>
+</body>
+</html>

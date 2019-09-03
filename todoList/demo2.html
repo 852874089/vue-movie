@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    　<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <style type="text/css">
+        .outer-container,.content {
+            width: 200px; height: 200px;
+        }
+        .outer-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .inner-container {
+            position: absolute; left: 0;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        /* for Chrome */
+        .inner-container::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<input type="text" placeholder="测试" />
+<input type="text" class="input1" placeholder="测试2" disabled="disabled" />
+
+<div class="btn">
+    <button class="readMore_btn">点击我</button>
+</div>
+<a class="btn_go">跳转</a>
+<div class="outer-container">
+    <div class="inner-container">
+        <div class="content">
+            我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动我可以滚动
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script type="text/javascript">
+    $(function () {
+        $('.btn').on('click', function (event) {
+
+            event.stopPropagation();
+           if($("div:first").hasClass("btn")){
+                alert("有")
+           }
+        });
+
+        $("input:first").attr("disabled","disabled");
+
+        ("a.btn_go").attr("href","https://www.baidu.com/");
+
+        if( $('input.input1').prop("disabled")==true ){
+            alert("ahahh")
+        }
+
+        if( typeof($("a.btn_go").attr("href"))=="undefined" ){
+            alert("没有")
+        }
+    })
+</script>
+
+</html>
+

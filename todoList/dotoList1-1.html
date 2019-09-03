@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>TodoList</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="inputValue" />
+        <input type="text" v-model="inputValue2" />
+        <button v-on:click="handleBtnClick">提交</button>
+        <ul>
+            <li v-for="item in list">
+                课程：{{item.text}}-----价格：{{item.price}}
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        // 同时添加两个
+        //新建一个vue实例
+        // el,data,methods都是vue实例或者方法
+        var app = new Vue({
+            //定义标签 接管doms例
+            el:'#app',
+            //数据
+            data:{
+                list:[],
+                inputValue:'',
+                inputValue2:''
+            },
+            //方法
+            methods:{
+                handleBtnClick: function(){
+                    this.list.push({text:this.inputValue,price:this.inputValue2});
+                    this.inputValue='';
+                    this.inputValue2='';
+                    //alert(this.inputValue);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
